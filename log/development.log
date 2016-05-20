@@ -3819,3 +3819,322 @@ Processing by ArticlesController#show as HTML
   Rendered comments/_form.html.erb (1.0ms)
   Rendered articles/show.html.erb within layouts/application (5.0ms)
 Completed 200 OK in 24ms (Views: 22.6ms | ActiveRecord: 0.3ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.5ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to CreateTags (20160520171140)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "tags" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35mSQL (0.3ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160520171140"]]
+  [1m[36m (1.4ms)[0m  [1mcommit transaction[0m
+Migrating to CreateTaggings (20160520171204)
+  [1m[35m (0.2ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TABLE "taggings" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "tag_id" integer, "article_id" integer, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  select sqlite_version(*)
+  [1m[36m (0.1ms)[0m  [1mCREATE  INDEX "index_taggings_on_tag_id" ON "taggings" ("tag_id")[0m
+  [1m[35m (0.2ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+
+  [1m[36m (0.2ms)[0m  [1mCREATE  INDEX "index_taggings_on_article_id" ON "taggings" ("article_id")[0m
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "schema_migrations" ("version") VALUES (?)  [["version", "20160520171204"]]
+  [1m[36m (1.1ms)[0m  [1mcommit transaction[0m
+  [1m[35mActiveRecord::SchemaMigration Load (0.2ms)[0m  SELECT "schema_migrations".* FROM "schema_migrations"
+  [1m[36m (0.4ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_comments_on_article_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_comments_on_article_id' AND type='index'
+[0m
+  [1m[35m (0.1ms)[0m              SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_article_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_article_id' AND type='index'
+
+  [1m[36m (0.1ms)[0m  [1m            SELECT sql
+            FROM sqlite_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+            UNION ALL
+            SELECT sql
+            FROM sqlite_temp_master
+            WHERE name='index_taggings_on_tag_id' AND type='index'
+[0m
+  [1m[36mArticle Load (17.4ms)[0m  [1mSELECT  "articles".* FROM "articles"  ORDER BY "articles"."id" ASC LIMIT 1[0m
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles"  ORDER BY "articles"."id" ASC LIMIT 1
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles"  ORDER BY "articles"."id" ASC LIMIT 1[0m
+  [1m[35mArticle Load (0.4ms)[0m  SELECT  "articles".* FROM "articles"  ORDER BY "articles"."id" ASC LIMIT 1
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.7ms)[0m  INSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "tag1"], ["created_at", "2016-05-20 17:19:08.601087"], ["updated_at", "2016-05-20 17:19:08.601087"]]
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "taggings" ("article_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 4], ["tag_id", 1], ["created_at", "2016-05-20 17:19:08.611666"], ["updated_at", "2016-05-20 17:19:08.611666"]]
+  [1m[35m (8.2ms)[0m  commit transaction
+  [1m[36m (0.2ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.6ms)[0m  INSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "tag2"], ["created_at", "2016-05-20 17:19:18.440098"], ["updated_at", "2016-05-20 17:19:18.440098"]]
+  [1m[36mSQL (0.2ms)[0m  [1mINSERT INTO "taggings" ("article_id", "tag_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["article_id", 4], ["tag_id", 2], ["created_at", "2016-05-20 17:19:18.444465"], ["updated_at", "2016-05-20 17:19:18.444465"]]
+  [1m[35m (13.2ms)[0m  commit transaction
+  [1m[36mTag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 4]]
+
+
+Started GET "/articles/new" for ::1 at 2016-05-20 10:29:02 -0700
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (16.9ms)
+  Rendered articles/new.html.erb within layouts/application (22.4ms)
+Completed 500 Internal Server Error in 62ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (undefined method `tag_list' for #<Article:0x007fc7e09a6e10>):
+    17:   </p>
+    18:   <p>
+    19:     <%= f.label :tag_list %><br />
+    20:     <%= f.text_field :tag_list %>
+    21:   </p> 
+    22: <% end %>
+  app/views/articles/_form.html.erb:20:in `block in _app_views_articles__form_html_erb__1562061641068719859_70248217340380'
+  app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__1562061641068719859_70248217340380'
+  app/views/articles/new.html.erb:2:in `_app_views_articles_new_html_erb__2821635034426891577_70248217454280'
+
+
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (11.6ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.7ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.5ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (42.2ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.6ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (25.3ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (54.1ms)
+
+
+Started GET "/articles/new" for ::1 at 2016-05-20 10:29:03 -0700
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (7.1ms)
+  Rendered articles/new.html.erb within layouts/application (8.2ms)
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.0ms)
+
+ActionView::Template::Error (undefined method `tag_list' for #<Article:0x007fc7de061e60>):
+    17:   </p>
+    18:   <p>
+    19:     <%= f.label :tag_list %><br />
+    20:     <%= f.text_field :tag_list %>
+    21:   </p> 
+    22: <% end %>
+  app/views/articles/_form.html.erb:20:in `block in _app_views_articles__form_html_erb__1562061641068719859_70248183030020'
+  app/views/articles/_form.html.erb:1:in `_app_views_articles__form_html_erb__1562061641068719859_70248183030020'
+  app/views/articles/new.html.erb:2:in `_app_views_articles_new_html_erb__2821635034426891577_70248200016760'
+
+
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (9.8ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (3.3ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (39.5ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.7ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (17.0ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.6ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (35.7ms)
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles"  ORDER BY "articles"."id" ASC LIMIT 1
+  [1m[36mTag Load (0.2ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 4]]
+
+
+Started GET "/articles/new" for ::1 at 2016-05-20 10:32:21 -0700
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (23.0ms)
+  Rendered articles/new.html.erb within layouts/application (24.2ms)
+Completed 200 OK in 68ms (Views: 60.3ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/articles/new" for ::1 at 2016-05-20 10:32:21 -0700
+Processing by ArticlesController#new as HTML
+  Rendered articles/_form.html.erb (2.1ms)
+  Rendered articles/new.html.erb within layouts/application (2.6ms)
+Completed 200 OK in 15ms (Views: 14.7ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/articles" for ::1 at 2016-05-20 10:32:46 -0700
+Processing by ArticlesController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Z7i1jFchfWDAsMdWqQXeQ9TEAm3rml5YOyze6VP9dW5x6u7/vmWEt4JUoNH+4JoFmJOVeCoi5uadbFDi6hCJiA==", "article"=>{"title"=>"testing tag list", "body"=>"tag list", "tag_list"=>"ruby, technology"}, "commit"=>"Create Article"}
+Unpermitted parameter: tag_list
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.4ms)[0m  [1mINSERT INTO "articles" ("title", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "testing tag list"], ["body", "tag list"], ["created_at", "2016-05-20 17:32:46.178029"], ["updated_at", "2016-05-20 17:32:46.178029"]]
+  [1m[35m (0.7ms)[0m  commit transaction
+Redirected to http://localhost:3000/articles/8
+Completed 302 Found in 6ms (ActiveRecord: 1.1ms)
+
+
+Started GET "/articles/8" for ::1 at 2016-05-20 10:32:46 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  Rendered articles/_comment.html.erb (0.0ms)
+  Rendered comments/_form.html.erb (1.9ms)
+  Rendered articles/show.html.erb within layouts/application (8.6ms)
+Completed 200 OK in 33ms (Views: 22.8ms | ActiveRecord: 0.8ms)
+
+
+Started GET "/articles" for ::1 at 2016-05-20 10:32:49 -0700
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (2.5ms)
+Completed 200 OK in 32ms (Views: 30.8ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/8" for ::1 at 2016-05-20 10:32:50 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 8]]
+  Rendered articles/_comment.html.erb (0.1ms)
+  Rendered comments/_form.html.erb (1.4ms)
+  Rendered articles/show.html.erb within layouts/application (5.6ms)
+Completed 200 OK in 22ms (Views: 20.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for ::1 at 2016-05-20 10:32:52 -0700
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.2ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (1.8ms)
+Completed 200 OK in 20ms (Views: 19.1ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/8" for ::1 at 2016-05-20 10:32:53 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35m (0.1ms)[0m  SELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  Rendered articles/_comment.html.erb (0.0ms)
+  Rendered comments/_form.html.erb (1.1ms)
+  Rendered articles/show.html.erb within layouts/application (4.0ms)
+Completed 200 OK in 20ms (Views: 18.2ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles/8/edit" for ::1 at 2016-05-20 10:33:05 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mTag Load (0.2ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?  [["article_id", 8]]
+  Rendered articles/_form.html.erb (12.7ms)
+  Rendered articles/edit.html.erb within layouts/application (14.5ms)
+Completed 200 OK in 40ms (Views: 38.2ms | ActiveRecord: 0.5ms)
+
+
+Started PATCH "/articles/8" for ::1 at 2016-05-20 10:34:53 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"LwGfisH8ZE7rP7JBHaxRuDntLnIUv1jjOtK88pxSf4s5U8T5KLidmanb1cZKSRX+dbq5Z9UH4F2ckjL5Jb+DbQ==", "article"=>{"title"=>"testing tag list", "body"=>"tag list", "tag_list"=>"ruby, technology"}, "commit"=>"Update Article", "id"=>"8"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35m (0.0ms)[0m  begin transaction
+  [1m[36m (0.0ms)[0m  [1mrollback transaction[0m
+Completed 500 Internal Server Error in 11ms (ActiveRecord: 0.9ms)
+
+ActiveRecord::UnknownAttributeError (unknown attribute 'tag_list' for Article.):
+  app/controllers/articles_controller.rb:43:in `update'
+
+
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.4ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.2ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/actionpack-4.2.6/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (25.2ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.5ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/console.js.erb within layouts/javascript (21.1ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/main.js.erb within layouts/javascript (0.2ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/joforchione/.rbenv/versions/2.1.2/lib/ruby/gems/2.1.0/gems/web-console-2.3.0/lib/web_console/templates/index.html.erb (38.9ms)
+
+
+Started PATCH "/articles/8" for ::1 at 2016-05-20 10:36:42 -0700
+Processing by ArticlesController#update as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"ycf3+ESzlCQMN0SQYyCWGZChup0ojePF1rye98xC4aXflayLrfdt807TIxc0xdJf3PYtiOk1W3tw/BD8da8dQw==", "article"=>{"title"=>"testing tag list", "body"=>"tag list", "tag_list"=>"ruby, technology"}, "commit"=>"Update Article", "id"=>"8"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.0ms)[0m  commit transaction
+Redirected to http://localhost:3000/articles/8
+Completed 302 Found in 12ms (ActiveRecord: 0.8ms)
+
+
+Started GET "/articles/8" for ::1 at 2016-05-20 10:36:43 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35m (0.2ms)[0m  SELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?  [["article_id", 8]]
+  Rendered articles/_comment.html.erb (0.0ms)
+  Rendered comments/_form.html.erb (1.7ms)
+  Rendered articles/show.html.erb within layouts/application (5.9ms)
+Completed 200 OK in 31ms (Views: 25.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/articles" for ::1 at 2016-05-20 10:36:45 -0700
+Processing by ArticlesController#index as HTML
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT "articles".* FROM "articles"[0m
+  Rendered articles/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 32ms (Views: 31.4ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/articles/8" for ::1 at 2016-05-20 10:36:46 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mArticle Load (0.2ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 8]]
+  Rendered articles/_comment.html.erb (0.0ms)
+  Rendered comments/_form.html.erb (0.9ms)
+  Rendered articles/show.html.erb within layouts/application (3.7ms)
+Completed 200 OK in 18ms (Views: 16.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/articles" for ::1 at 2016-05-20 10:36:50 -0700
+Processing by ArticlesController#index as HTML
+  [1m[35mArticle Load (0.1ms)[0m  SELECT "articles".* FROM "articles"
+  Rendered articles/index.html.erb within layouts/application (1.0ms)
+Completed 200 OK in 18ms (Views: 17.3ms | ActiveRecord: 0.1ms)
+  [1m[35mArticle Load (0.3ms)[0m  SELECT  "articles".* FROM "articles"  ORDER BY "articles"."id" DESC LIMIT 1
+  [1m[36mTag Load (0.3ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 8]]
+  [1m[35mTag Load (0.1ms)[0m  SELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT 1  [["name", "ruby"]]
+  [1m[36m (0.0ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "ruby"], ["created_at", "2016-05-20 17:50:06.167020"], ["updated_at", "2016-05-20 17:50:06.167020"]]
+  [1m[36m (9.8ms)[0m  [1mcommit transaction[0m
+  [1m[35mTag Load (0.3ms)[0m  SELECT  "tags".* FROM "tags" WHERE "tags"."name" = ? LIMIT 1  [["name", "technology"]]
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "tags" ("name", "created_at", "updated_at") VALUES (?, ?, ?)  [["name", "technology"], ["created_at", "2016-05-20 17:50:06.181285"], ["updated_at", "2016-05-20 17:50:06.181285"]]
+  [1m[36m (0.9ms)[0m  [1mcommit transaction[0m
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.7ms)[0m  [1mINSERT INTO "articles" ("title", "body", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["title", "A Sample Article for Tagging!"], ["body", "Great article goes here"], ["created_at", "2016-05-20 17:50:06.206291"], ["updated_at", "2016-05-20 17:50:06.206291"]]
+  [1m[35mSQL (0.2ms)[0m  INSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)  [["tag_id", 3], ["article_id", 9], ["created_at", "2016-05-20 17:50:06.210010"], ["updated_at", "2016-05-20 17:50:06.210010"]]
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "taggings" ("tag_id", "article_id", "created_at", "updated_at") VALUES (?, ?, ?, ?)[0m  [["tag_id", 4], ["article_id", 9], ["created_at", "2016-05-20 17:50:06.211965"], ["updated_at", "2016-05-20 17:50:06.211965"]]
+  [1m[35m (1.0ms)[0m  commit transaction
+  [1m[36mArticle Load (0.2ms)[0m  [1mSELECT "articles".* FROM "articles" INNER JOIN "taggings" ON "articles"."id" = "taggings"."article_id" WHERE "taggings"."tag_id" = ?[0m  [["tag_id", 3]]
+
+
+Started GET "/articles/8" for ::1 at 2016-05-20 10:52:15 -0700
+Processing by ArticlesController#show as HTML
+  Parameters: {"id"=>"8"}
+  [1m[36mArticle Load (0.1ms)[0m  [1mSELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1[0m  [["id", 8]]
+  [1m[35mTag Load (0.1ms)[0m  SELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?  [["article_id", 8]]
+  [1m[36m (0.1ms)[0m  [1mSELECT COUNT(*) FROM "comments" WHERE "comments"."article_id" = ?[0m  [["article_id", 8]]
+  Rendered articles/_comment.html.erb (0.0ms)
+  Rendered comments/_form.html.erb (1.7ms)
+  Rendered articles/show.html.erb within layouts/application (17.6ms)
+Completed 200 OK in 47ms (Views: 33.3ms | ActiveRecord: 1.4ms)
+
+
+Started GET "/articles/8/edit" for ::1 at 2016-05-20 10:52:19 -0700
+Processing by ArticlesController#edit as HTML
+  Parameters: {"id"=>"8"}
+  [1m[35mArticle Load (0.1ms)[0m  SELECT  "articles".* FROM "articles" WHERE "articles"."id" = ? LIMIT 1  [["id", 8]]
+  [1m[36mTag Load (0.1ms)[0m  [1mSELECT "tags".* FROM "tags" INNER JOIN "taggings" ON "tags"."id" = "taggings"."tag_id" WHERE "taggings"."article_id" = ?[0m  [["article_id", 8]]
+  Rendered articles/_form.html.erb (3.6ms)
+  Rendered articles/edit.html.erb within layouts/application (4.4ms)
+Completed 200 OK in 19ms (Views: 17.4ms | ActiveRecord: 0.2ms)
