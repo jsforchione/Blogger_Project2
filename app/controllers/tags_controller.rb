@@ -4,7 +4,7 @@ class TagsController < ApplicationController
   end
 
   def index
-    @tag = Tags.all
+    @tag = Tag.all
   end
 
   def destroy
